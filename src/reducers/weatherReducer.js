@@ -1,4 +1,4 @@
-import {SET_WEATHER} from "../actions/userAction.js";
+import {SET_MESSAGE, SET_WEATHER} from "../actions/userAction.js";
 
 export const weatherReducer = (state = {}, action) => {
     switch (action.type) {
@@ -8,6 +8,8 @@ export const weatherReducer = (state = {}, action) => {
                                         temp: action.payload.temp,
                                         pressure: action.payload.pressure,
                                         sunset: action.payload.sunset}};
+        case SET_MESSAGE:
+        return {...state, message: action.payload};
               default:
             return state;
     }

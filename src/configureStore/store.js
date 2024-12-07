@@ -3,16 +3,13 @@ import {weatherReducer} from "../reducers/weatherReducer.js";
 
 const initialState = {
     weather: {
-        country: 'Monster',
-        city: 'Monster',
-        temp: 'monster',
-        pressure: 'Monster',
-        sunset: 'Monster'
-    }
-    // stats: {
-    //     followers: 0,
-    //     following: 0
-    // }
-}
+        country: 'country',
+        city: 'city',
+        temp: 'temp',
+        pressure: 'pressure',
+        sunset: new Date()
+    },
+    message: 'Enter city name'
+ }
 
 export const store = createStore(weatherReducer, initialState);

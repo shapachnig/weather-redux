@@ -2,22 +2,25 @@ import Form from "./Form.jsx";
 import Weather from "./Weather.jsx";
 import {useState} from "react";
 import {api_key, base_url} from "../utils/constants.js";
+import {useDispatch} from "react-redux";
+import {set_weather} from "../actions/userAction.js";
+
 
 const Data = () => {
-    const [weatherInfo, setWeatherInfo] = useState({});
     const [message, setMessage] = useState('Enter city name');
+    const dispatch = useDispatch();
 
     const getWeather = city => {
         fetch(`${base_url}?q=${city}&appid=${api_key}&units=metric`)
             .then(result => result.json())
             .then(data => {
-                setWeatherInfo({
-                    country: data.sys.country,
+
+                dispatch(set_weather({country: data.sys.country,
                     city: data.name,
                     temp: data.main.temp,
                     pressure: data.main.pressure,
-                    sunset: new Date(data.sys.sunset * 1000)
-                })
+                    sunset: new Date(data.sys.sunset * 1000)} ))
+
                 setMessage('')
             })
             .catch(e => {
@@ -29,7 +32,7 @@ const Data = () => {
     return (
         <div>
             <Form getWeather={getWeather}/>
-            <Weather message={message} weather={weatherInfo}/>
+            <Weather message={message} />
         </div>
     );
 };
